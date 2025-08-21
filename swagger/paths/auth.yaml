@@ -1,0 +1,151 @@
+register:
+  post:
+    tags:
+      - Auth
+    summary: Register a new user
+    description: Endpoint to create a new account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../components.yaml#/components/schemas/RegisterInput"
+    responses:
+      "201":
+        description: User registered successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/User"
+                message:
+                  type: string
+                  example: user registered successfully
+
+      "409":
+        description: User already exist
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/409UserAlreadyExistError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+login:
+  post:
+    tags:
+      - Auth
+    summary: Login a user
+    description: Endpoint to authenticate a user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../components.yaml#/components/schemas/LoginInput"
+    responses:
+      "201":
+        description: User registered successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/User"
+                message:
+                  type: string
+                  example: login successful
+
+      "400":
+        description: Bad Request Error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/400BadRequestError"
+
+      "401":
+        description: Invalid credentials error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+logout:
+  post:
+    tags:
+      - Auth
+    summary: Logout a user
+    description: Endpoint to logout a user
+    responses:
+      "200":
+        description: User logged out successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                message:
+                  type: string
+                  example: logout successful
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+me:
+  get:
+    tags:
+      - Auth
+    summary: Current logged in user's profile
+    description: Endpoint to get profile detail of logged in user
+    security:
+      - cookieAuth: []
+    responses:
+      "200":
+        description: Profile fetched successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/User"
+                message:
+                  type: string
+                  example: data fetched successfully
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"

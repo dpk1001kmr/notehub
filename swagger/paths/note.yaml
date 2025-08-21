@@ -1,0 +1,256 @@
+note:
+  get:
+    tags:
+      - Notes
+    summary: Get all notes
+    description: Returns a list of notes (Protected)
+    security:
+      - cookieAuth: []
+    responses:
+      "200":
+        description: List of notes
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  type: array
+                  items:
+                    $ref: "../components.yaml#/components/schemas/Note"
+                message:
+                  type: string
+                  example: data fetched successfully
+      "401":
+        description: Unauthorized request error / Invalid access token
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+  post:
+    tags:
+      - Notes
+    summary: Create a note
+    description: Creates a new note (Protected)
+    security:
+      - cookieAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../components.yaml#/components/schemas/CreateNote"
+    responses:
+      "201":
+        description: Note created
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/Note"
+                message:
+                  type: string
+                  example: note created successfully
+      "401":
+        description: Unauthorized request error / Invalid access token
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+noteById:
+  get:
+    tags:
+      - Notes
+    summary: Get a note by ID
+    description: Fetches a single note (Protected)
+    security:
+      - cookieAuth: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Note details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/Note"
+                message:
+                  type: string
+                  example: note fetched successfully
+      "400":
+        description: Bad Request Error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/400BadRequestError"
+
+      "401":
+        description: Unauthorized request error / Invalid access token
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+      "404":
+        description: Document not found
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/404NotFoundError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+  patch:
+    tags:
+      - Notes
+    summary: Update a note
+    description: Updates a note by ID (Protected)
+    security:
+      - cookieAuth: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../components.yaml#/components/schemas/UpdateNote"
+    responses:
+      "200":
+        description: Note details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/Note"
+                message:
+                  type: string
+                  example: note updated successfully
+      "400":
+        description: Bad Request Error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/400BadRequestError"
+
+      "401":
+        description: Unauthorized request error / Invalid access token
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+      "404":
+        description: Document not found
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/404NotFoundError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"
+
+  delete:
+    tags:
+      - Notes
+    summary: Delete a note
+    description: Deletes a note by ID (Protected)
+    security:
+      - cookieAuth: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      "200":
+        description: Note details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: success
+                data:
+                  $ref: "../components.yaml#/components/schemas/Note"
+                message:
+                  type: string
+                  example: note delete successfully
+      "400":
+        description: Bad Request Error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/400BadRequestError"
+
+      "401":
+        description: Unauthorized request error / Invalid access token
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/UnauthorizedRequestError"
+      "404":
+        description: Document not found
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/404NotFoundError"
+
+      "500":
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: "../components.yaml#/components/schemas/InternalServerError"

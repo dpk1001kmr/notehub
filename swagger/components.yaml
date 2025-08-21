@@ -1,0 +1,134 @@
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token # Name of the cookie your server sets
+
+  schemas:
+    RegisterInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: johndoe
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: strongpassword123
+      required:
+        - name
+        - email
+        - password
+
+    LoginInput:
+      type: object
+      properties:
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: strongpassword123
+      required:
+        - email
+        - password
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+
+    Note:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateNote:
+      type: object
+      properties:
+        title:
+          type: string
+          example: My first note
+        content:
+          type: string
+          example: This is the content of my note.
+      required:
+        - title
+        - content
+
+    UpdateNote:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Updated note title
+        content:
+          type: string
+          example: Updated note content
+
+    400BadRequestError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: fail
+        message:
+          type: string
+
+    404NotFoundError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: fail
+        message:
+          type: string
+          example: Document not found
+
+    409UserAlreadyExistError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: fail
+        message:
+          type: string
+          example: User already exist
+
+    InternalServerError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Internal server error
+
+    UnauthorizedRequestError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: fail
+        message:
+          type: string
