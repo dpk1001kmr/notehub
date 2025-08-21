@@ -5,7 +5,7 @@ info:
   description: API documentation for notehub
 
 servers:
-  - url: http://localhost:8000
+  - url: https://notehub-vr3x.onrender.com/
     description: Local development server
 
 paths:
