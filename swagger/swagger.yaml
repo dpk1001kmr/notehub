@@ -6,7 +6,7 @@ info:
 
 servers:
   - url: https://notehub-vr3x.onrender.com/
-    description: Development server
+    description: Server
 
 paths:
   /api/v1/auth/register:
